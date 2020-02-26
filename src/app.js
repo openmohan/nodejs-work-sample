@@ -34,12 +34,20 @@ router.get('/:uid', async (req, res) => {
 });
 app.use('/users/', router);
 
-// catch 404 and forward to error handler
+// catch 404 and forwarded to error handler
 app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
+
+// Log the error
+app.use((err, req, res, next) => {
+  // eslint-disable-next-line no-console
+  console.log(err);
+  next(err);
+});
+
 
 /**
  * Get port from environment and store in Express.
@@ -52,14 +60,8 @@ app.set('port', port);
  */
 const server = http.createServer(app);
 
-// Log the error
-app.use((err, req, res, next) => {
-  // eslint-disable-next-line no-console
-  console.log(err);
-  next(err);
-});
+app.use(errorHandler({ server }));
 
-app.use(errorHandler());
 
 /**
  * Listen on provided port, on all network interfaces.

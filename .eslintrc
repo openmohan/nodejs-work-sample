@@ -1,7 +1,8 @@
 {
   "env": {
     "mocha": true,
-    "node": true
+    "node": true,
+    "es6": true
   },
   "globals": {
     "connect": true
@@ -27,5 +28,9 @@
       "functions": "ignore"
     }],
     "max-len": 0
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2018
   }
 }
