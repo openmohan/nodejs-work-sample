@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "apidoc": "$(npm bin)/apidoc  -f \".*\\.js$\" -i src/ -o doc/",
-    "dev": "DEBUG=ws-nodejs-re:* $(npm bin)/nodemon -L src/app.js",
+    "dev": "DEBUG=ws-nodejs-re:* $(npm bin)/nodemon --exec babel-node -L src/app.js",
     "lint": "$(npm bin)/eslint src/ config/ test/",
     "start": "node src/app.js",
     "test": "NODE_ENV=test PORT=3333 $(npm bin)/mocha --exit --recursive -R spec"
@@ -19,6 +19,7 @@
     "debug": "~4.1.1",
     "express": "~4.17.1",
     "express-error-handler": "^1.1.0",
+    "is-uuid": "^1.0.2",
     "joi": "^14.3.1 ",
     "morgan": "~1.9.1",
     "path": "^0.12.7",
@@ -27,13 +28,22 @@
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "sequelize": "^5.21.5",
-    "sqlite3": "^4.1.0"
+    "sqlite3": "^4.1.0",
+    "uuid": "^7.0.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/register": "^7.8.3",
+    "@babel/runtime": "^7.8.4",
     "apidoc": "^0.17.7",
-    "eslint": "^6.1.0",
+    "babel-loader": "^8.0.6",
+    "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-security": "^1.4.0",

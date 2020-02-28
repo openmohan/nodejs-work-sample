@@ -5,11 +5,12 @@ const errorHandler = require('express-error-handler');
 const express = require('express');
 const http = require('http');
 const logger = require('morgan');
-const models = require('./models');
+// const models = require('./db/models');
 const serverHelper = require('./helpers/server_helper');
+const router = require('./server/routes');
 
 const app = express();
-const router = express.Router();
+// const router = express.Router();
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -17,22 +18,26 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // routes setup
-router.get('/:uid', async (req, res) => {
-  const user = await models.User.findOne({ where: { id: parseInt(req.params.uid, 10) } });
+// router.get('/:uid', async (req, res) => {
+//   const user = await models.User.findOne({ where: { id: parseInt(req.params.uid, 10) } });
 
-  if (user) {
-    const data = {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-    };
+//   if (user) {
+//     const data = {
+//       id: user.id,
+//       name: user.name,
+//       email: user.email,
+//     };
 
-    return res.status(200).json(data);
-  }
+//     return res.status(200).json(data);
+//   }
 
-  return res.status(404).send('User not found (1469551345)');
-});
-app.use('/users/', router);
+//   return res.status(404).send('User not found (1469551345)');
+// });
+
+app.use('/users/', router.default.UserRouter);
+app.use('/courses/', router.default.CourseRouter);
+app.use('/registration/', router.default.RegistrationRouter);
+
 
 // catch 404 and forwarded to error handler
 app.use((req, res, next) => {

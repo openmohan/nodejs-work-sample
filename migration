@@ -1,0 +1,2 @@
+sequelize model:create --name users --attributes id:string, name:string, email:string
+sequelize model:create --name courses --attributes id:UUID, name:string

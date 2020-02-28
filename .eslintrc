@@ -15,7 +15,7 @@
   "extends": [
     "airbnb-base",
     "eslint:recommended",
-    "plugin:node/recommended",
+    // "plugin:node/recommended",
     "plugin:promise/recommended",
     "plugin:security/recommended"
   ],
@@ -25,7 +25,7 @@
       "objects": "always-multiline",
       "imports": "always-multiline",
       "exports": "always-multiline",
-      "functions": "ignore"
+      "functions": "ignore",
     }],
     "max-len": 0
   },

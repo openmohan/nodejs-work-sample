@@ -8,7 +8,7 @@ const testHost = `http://localhost:${process.env.PORT}`;
 beforeEach(async function clearDatabaseBeforeTests() {
   this.timeout(10000);
 
-  const db = require('../src/models');
+  const db = require('../src/db/models');
   await db.sequelize.sync({ force: true });
   await fixtures.loadFile('test/fixtures/*.json', db, { log: () => {} });
 

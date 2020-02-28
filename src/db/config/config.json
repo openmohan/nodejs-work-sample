@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "developer",
+    "password": "development",
+    "database": "roster_management",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": null,
+    "database": "roster_management_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": null,
+    "database": "roster_management_prod",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
