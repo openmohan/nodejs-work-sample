@@ -18,7 +18,7 @@ describe('Testing the Course controller:', () => {
 
     response.status = function status() { return { json() {} }; };
 
-    let responseStub = sinon.spy(response)
+    // const responseStub = sinon.spy(response);
 
     const addCourseStub = sinon.stub(courseService, 'addCourse').resolves(request);
 
