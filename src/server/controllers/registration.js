@@ -25,7 +25,7 @@ class RegistrationController {
   }
 
   static async addRegistration(req, res) {
-    if (!req.body.registration_id || !req.body.user_id) {
+    if (!req.body.course_id || !req.body.user_id) {
       util.setError(statusCode.BAD_REQUEST, 'Please provide complete details');
       return util.send(res);
     }

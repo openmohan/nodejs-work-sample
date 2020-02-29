@@ -41,11 +41,11 @@ Object.keys(db).forEach((modelName) => {
 });
 
 // Associations
-db.Registration.hasMany(db.Course);
-db.Registration.hasMany(db.User);
+// db.Registration.hasMany(db.Course);
+// db.Registration.hasMany(db.User);
 
-db.User.belongsTo(db.Registration);
-db.Course.belongsTo(db.Registration);
+// db.User.belongsTo(db.Registration);
+// db.Course.belongsTo(db.Registration);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

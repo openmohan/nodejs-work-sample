@@ -20,7 +20,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     tableName: 'users',
     timestamps: false,
+    freezeTableName: true,
   });
+
   User.beforeCreate((user) => { user.id = uuid(); }); // eslint-disable-line no-param-reassign
   return User;
 };

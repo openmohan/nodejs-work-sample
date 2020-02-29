@@ -32,7 +32,7 @@ export default class Util {
       case status.OK:
         return res.status(this.statusCode).json(this.data);
       case status.CREATED:
-        return res.status(this.statusCode).end();
+        return res.status(this.statusCode).json(this.data);
       case status.SUCCESS_NO_CONTENT:
         return res.status(this.statusCode).end();
       case status.BAD_REQUEST:

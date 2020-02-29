@@ -36,7 +36,7 @@ app.use(cookieParser());
 
 app.use('/users/', router.default.UserRouter);
 app.use('/courses/', router.default.CourseRouter);
-app.use('/registration/', router.default.RegistrationRouter);
+app.use('/registrations/', router.default.RegistrationRouter);
 
 
 // catch 404 and forwarded to error handler

@@ -1,19 +1,22 @@
 /* eslint-disable global-require */
 // eslint-disable-next-line node/no-unpublished-require
+import sinon from 'sinon';
+import Util from '../src/server/utils/Utils';
+
 const fixtures = require('sequelize-fixtures');
 const rp = require('request-promise');
 
 const testHost = `http://localhost:${process.env.PORT}`;
 
-beforeEach(async function clearDatabaseBeforeTests() {
-  this.timeout(10000);
+// beforeEach(async function clearDatabaseBeforeTests() {
+//   this.timeout(10000);
 
-  const db = require('../src/db/models');
-  await db.sequelize.sync({ force: true });
-  await fixtures.loadFile('test/fixtures/*.json', db, { log: () => {} });
+//   const db = require('../src/db/models');
+//   await db.sequelize.sync({ force: true });
+//   await fixtures.loadFile('test/fixtures/*.json', db, { log: () => {} });
 
-  return require('../src/app');
-}); // END before
+//   return require('../src/app');
+// }); // END before
 
 /**
  * send request using request-promise
@@ -94,3 +97,16 @@ exports.getDeleteRequestOpts = function getPostRequestOpts(url) {
 
   return opts;
 };
+
+const setSuccessSpy = sinon.spy();
+
+export class utilStub {
+  static send() {
+    return sinon.stub(Util.prototype, 'send').returns();
+  }
+
+  static setSuccess() {
+    sinon.stub(Util.prototype, 'setSuccess').callsFake(setSuccessSpy);
+    return setSuccessSpy;
+  }
+}

@@ -7,8 +7,8 @@
     "dialect": "postgres"
   },
   "test": {
-    "username": "postgres",
-    "password": null,
+    "username": "tester",
+    "password": "test",
     "database": "roster_management_test",
     "host": "127.0.0.1",
     "dialect": "postgres"

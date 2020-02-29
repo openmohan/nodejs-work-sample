@@ -3,11 +3,11 @@ import database from '../../db/models';
 class registrationService {
   static async getAllRegistrations(queryParams) {
     const filerObject = {};
-    if (queryParams.registration_id) {
-      filerObject.registration_id = queryParams.registration_id;
+    if (queryParams.course_id) {
+      filerObject.course_id = queryParams.course_id;
     }
     if (queryParams.user_id) {
-      filerObject.registration_id = queryParams.user_id;
+      filerObject.user_id = queryParams.user_id;
     }
     return database.Registration.findAll({ where: filerObject });
   }
