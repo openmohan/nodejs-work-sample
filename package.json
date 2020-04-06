@@ -10,7 +10,8 @@
     "lint": "$(npm bin)/eslint src/ config/ test/",
     "start": "node src/app.js",
     "test": "NODE_ENV=test PORT=3333 $(npm bin)/mocha --require @babel/register --exit $(find test -name '*spec.js')",
-    "integration-test": "export PORT=3333 NODE_ENV=test &&  sequelize db:migrate:undo:all  && sequelize db:migrate  && nyc --require @babel/register  mocha ./test/integration/integration.js --timeout 20000 --exit"
+    "integration-test": "export PORT=3333 NODE_ENV=test &&  sequelize db:migrate:undo:all  && sequelize db:migrate  && nyc --require @babel/register  mocha ./test/integration/integration.js --timeout 20000 --exit",
+    "cover": "NODE_ENV=test PORT=3333 $(npm bin)/nyc --reporter=html $(npm bin)/mocha --require @babel/register --exit $(find test -name '*spec.js')"
   },
   "author": "Digication",
   "license": "PRIVATE",
@@ -54,7 +55,7 @@
     "eslint-plugin-security": "^1.4.0",
     "mocha": "^6.2.2",
     "nodemon": "^1.19.3",
-    "nyc": "^15.0.0",
+    "nyc": "^15.0.1",
     "sequelize-fixtures": "^1.1.1"
   },
   "apidoc": {

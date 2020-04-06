@@ -4,7 +4,6 @@ import 'chai/register-should';
 import app from '../../src/app';
 import statusCode from '../../src/server/utils/status';
 
-
 chai.use(chatHttp);
 const { expect } = chai;
 
@@ -20,7 +19,8 @@ describe('Testing the user endpoints:', () => {
     email: 'c@b.com',
   };
   it('It should create a user', (done) => {
-    chai.request(app)
+    chai
+      .request(app)
       .post('/users')
       .set('Accept', 'application/json')
       .send(goodUser)
@@ -35,7 +35,8 @@ describe('Testing the user endpoints:', () => {
     const user = {
       name: 'First Awesome user',
     };
-    chai.request(app)
+    chai
+      .request(app)
       .post('/users')
       .set('Accept', 'application/json')
       .send(user)
@@ -46,7 +47,8 @@ describe('Testing the user endpoints:', () => {
   });
 
   it('It should get a particular user', (done) => {
-    chai.request(app)
+    chai
+      .request(app)
       .get(`/users/${goodUser.id}`)
       .end((err, res) => {
         expect(res.status).to.equal(statusCode.OK);
@@ -57,7 +59,8 @@ describe('Testing the user endpoints:', () => {
 
   it('It should update the user', (done) => {
     goodUser.name = 'easyName';
-    chai.request(app)
+    chai
+      .request(app)
       .put(`/users/${goodUser.id}`)
       .send(goodUser)
       .end((err, res) => {
@@ -67,7 +70,8 @@ describe('Testing the user endpoints:', () => {
   });
 
   it('It should create second user', (done) => {
-    chai.request(app)
+    chai
+      .request(app)
       .post('/users')
       .set('Accept', 'application/json')
       .send(goodUser2)
@@ -79,7 +83,8 @@ describe('Testing the user endpoints:', () => {
   });
 
   it('It should list all user', (done) => {
-    chai.request(app)
+    chai
+      .request(app)
       .get('/users')
       .set('Accept', 'application/json')
       .send(goodUser2)
@@ -92,7 +97,8 @@ describe('Testing the user endpoints:', () => {
 
   it('It should delete the user', (done) => {
     goodUser.name = 'easyName';
-    chai.request(app)
+    chai
+      .request(app)
       .delete(`/users/${goodUser.id}`)
       .end((err, res) => {
         expect(res.status).to.equal(statusCode.SUCCESS_NO_CONTENT);
@@ -111,7 +117,8 @@ describe('Testing the course endpoints:', () => {
     name: 'maths',
   };
   it('It should create a course', (done) => {
-    chai.request(app)
+    chai
+      .request(app)
       .post('/courses')
       .set('Accept', 'application/json')
       .send(goodCourse)
@@ -124,7 +131,8 @@ describe('Testing the course endpoints:', () => {
 
   it('It should not create a course', (done) => {
     const course = {};
-    chai.request(app)
+    chai
+      .request(app)
       .post('/courses')
       .set('Accept', 'application/json')
       .send(course)
@@ -135,7 +143,8 @@ describe('Testing the course endpoints:', () => {
   });
 
   it('It should get a particular course', (done) => {
-    chai.request(app)
+    chai
+      .request(app)
       .get(`/courses/${goodCourse.id}`)
       .end((err, res) => {
         expect(res.status).to.equal(statusCode.OK);
@@ -146,7 +155,8 @@ describe('Testing the course endpoints:', () => {
 
   it('It should update the course', (done) => {
     goodCourse.name = 'easyName';
-    chai.request(app)
+    chai
+      .request(app)
       .put(`/courses/${goodCourse.id}`)
       .send(goodCourse)
       .end((err, res) => {
@@ -156,7 +166,8 @@ describe('Testing the course endpoints:', () => {
   });
 
   it('It should create second course', (done) => {
-    chai.request(app)
+    chai
+      .request(app)
       .post('/courses')
       .set('Accept', 'application/json')
       .send(goodCourse2)
@@ -168,7 +179,8 @@ describe('Testing the course endpoints:', () => {
   });
 
   it('It should list all course', (done) => {
-    chai.request(app)
+    chai
+      .request(app)
       .get('/courses')
       .set('Accept', 'application/json')
       .send(goodCourse2)
@@ -181,7 +193,8 @@ describe('Testing the course endpoints:', () => {
 
   it('It should delete the course', (done) => {
     goodCourse.name = 'easyName';
-    chai.request(app)
+    chai
+      .request(app)
       .delete(`/courses/${goodCourse.id}`)
       .end((err, res) => {
         expect(res.status).to.equal(statusCode.SUCCESS_NO_CONTENT);
@@ -198,7 +211,8 @@ describe('Testing the registration endpoints:', () => {
     email: 'd@b.com',
   };
   it('It should create a user', (done) => {
-    chai.request(app)
+    chai
+      .request(app)
       .post('/users')
       .set('Accept', 'application/json')
       .send(goodUser3)
@@ -214,7 +228,8 @@ describe('Testing the registration endpoints:', () => {
     name: 'biology',
   };
   it('It should create a course', (done) => {
-    chai.request(app)
+    chai
+      .request(app)
       .post('/courses')
       .set('Accept', 'application/json')
       .send(goodCourse3)
@@ -250,9 +265,9 @@ describe('Testing the registration endpoints:', () => {
     is_faculty: true,
   };
 
-
   it('It should create a registration', (done) => {
-    chai.request(app)
+    chai
+      .request(app)
       .post('/registrations')
       .set('Accept', 'application/json')
       .send(goodRegistration)
@@ -263,7 +278,8 @@ describe('Testing the registration endpoints:', () => {
   });
 
   it('It should create second registration- different user, different course', (done) => {
-    chai.request(app)
+    chai
+      .request(app)
       .post('/registrations')
       .set('Accept', 'application/json')
       .send(goodRegistration2)
@@ -274,7 +290,8 @@ describe('Testing the registration endpoints:', () => {
   });
 
   it('It should create third registration- different user, different course', (done) => {
-    chai.request(app)
+    chai
+      .request(app)
       .post('/registrations')
       .set('Accept', 'application/json')
       .send(goodRegistration3)
@@ -285,7 +302,8 @@ describe('Testing the registration endpoints:', () => {
   });
 
   it('It should create fourth registration- different user, different course', (done) => {
-    chai.request(app)
+    chai
+      .request(app)
       .post('/registrations')
       .set('Accept', 'application/json')
       .send(goodRegistration4)
@@ -297,7 +315,8 @@ describe('Testing the registration endpoints:', () => {
 
   it('It should not create a registration', (done) => {
     const registration = {};
-    chai.request(app)
+    chai
+      .request(app)
       .post('/registrations')
       .set('Accept', 'application/json')
       .send(registration)
@@ -308,7 +327,8 @@ describe('Testing the registration endpoints:', () => {
   });
 
   it('It should get a particular registration', (done) => {
-    chai.request(app)
+    chai
+      .request(app)
       .get(`/registrations/${goodRegistration.id}`)
       .end((err, res) => {
         expect(res.status).to.equal(statusCode.OK);
@@ -319,7 +339,8 @@ describe('Testing the registration endpoints:', () => {
 
   it('It should update the registration', (done) => {
     goodRegistration.is_faculty = true;
-    chai.request(app)
+    chai
+      .request(app)
       .put(`/registrations/${goodRegistration.id}`)
       .send(goodRegistration)
       .end((err, res) => {
@@ -328,20 +349,26 @@ describe('Testing the registration endpoints:', () => {
       });
   });
 
-
   it('It should list all registration', (done) => {
-    chai.request(app)
+    chai
+      .request(app)
       .get('/registrations')
       .set('Accept', 'application/json')
       .end((err, res) => {
         expect(res.status).to.equal(statusCode.OK);
-        expect(res.body).to.eql([goodRegistration2, goodRegistration3, goodRegistration4, goodRegistration]);
+        expect(res.body).to.eql([
+          goodRegistration2,
+          goodRegistration3,
+          goodRegistration4,
+          goodRegistration,
+        ]);
         done();
       });
   });
 
   it('It should list all registration respective to course_id', (done) => {
-    chai.request(app)
+    chai
+      .request(app)
       .get('/registrations?course_id=f6859199-400b-48db-9a74-9071514ca323')
       .set('Accept', 'application/json')
       .end((err, res) => {
@@ -353,7 +380,8 @@ describe('Testing the registration endpoints:', () => {
 
   it('It should delete the registration', (done) => {
     goodRegistration.name = 'easyName';
-    chai.request(app)
+    chai
+      .request(app)
       .delete(`/registrations/${goodRegistration.id}`)
       .end((err, res) => {
         expect(res.status).to.equal(statusCode.SUCCESS_NO_CONTENT);

@@ -1,10 +1,9 @@
 /* eslint-disable global-require */
 // eslint-disable-next-line node/no-unpublished-require
 import sinon from 'sinon';
-import Util from '../src/server/utils/Utils';
 
-const fixtures = require('sequelize-fixtures');
 const rp = require('request-promise');
+const Util = require('../src/server/utils/Utils');
 
 const testHost = `http://localhost:${process.env.PORT}`;
 
@@ -100,7 +99,7 @@ exports.getDeleteRequestOpts = function getPostRequestOpts(url) {
 
 const setSuccessSpy = sinon.spy();
 
-export class utilStub {
+export default class utilStub {
   static send() {
     return sinon.stub(Util.prototype, 'send').returns();
   }

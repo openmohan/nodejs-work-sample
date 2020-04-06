@@ -83,7 +83,7 @@ router.get('/:id', CourseController.getCourse);
  * @api {put} /courses/:id Update Course information
  * @apiName UpdateCourse
  * @apiGroup CourseAPI
- * 
+ *
  * @apiParam {Number} id Courses UUID.
  *
  * @apiParamExample {json} Request Body Example:

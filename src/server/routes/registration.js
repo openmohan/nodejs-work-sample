@@ -60,7 +60,7 @@ router.post('/', RegistrationController.addRegistration);
  * @api {put} /registrations/:id Get Registration information
  * @apiName GetRegistration
  * @apiGroup RegistrationAPI
- * 
+ *
  * @apiParam {Number} id Registrations UUID.
  *
  * @apiParamExample {json} Request Body Example:
@@ -89,7 +89,7 @@ router.get('/:id', RegistrationController.getRegistration);
  * @api {put} /registrations/:id Update Registration information
  * @apiName UpdateRegistration
  * @apiGroup RegistrationAPI
- * 
+ *
  * @apiParam {Number} id Registrations UUID.
  *
  * @apiParamExample {json} Request Body Example:

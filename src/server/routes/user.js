@@ -88,7 +88,7 @@ router.get('/:id', UserController.getUser);
  * @api {put} /users/:id Update User information
  * @apiName UpdateUser
  * @apiGroup UserAPI
- * 
+ *
  * @apiParam {Number} id Users UUID.
  *
  * @apiParamExample {json} Request Body Example:

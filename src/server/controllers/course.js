@@ -1,9 +1,8 @@
-import CourseService from '../services/course';
-import Util from '../utils/Utils';
-import statusCode from '../utils/status';
+import CourseService from "../services/course";
+import Util from "../utils/Utils";
+import statusCode from "../utils/status";
 
-const isUUID = require('is-uuid');
-
+const isUUID = require("is-uuid");
 
 const util = new Util();
 
@@ -12,9 +11,9 @@ class CourseController {
     try {
       const allCourses = await CourseService.getAllCourses();
       if (allCourses.length > 0) {
-        util.setSuccess(statusCode.OK, 'Courses retrieved', allCourses);
+        util.setSuccess(statusCode.OK, "Courses retrieved", allCourses);
       } else {
-        util.setSuccess(statusCode.OK, 'No course found', allCourses);
+        util.setSuccess(statusCode.OK, "No course found", allCourses);
       }
       return util.send(res);
     } catch (error) {
@@ -24,18 +23,20 @@ class CourseController {
   }
 
   static async addCourse(req, res) {
+    const utiln = new Util();
+
     if (!req.body.name) {
-      util.setError(statusCode.BAD_REQUEST, 'Please provide complete details');
-      return util.send(res);
+      utiln.setError(statusCode.BAD_REQUEST, "Please provide complete details");
+      return utiln.send(res);
     }
     const newCourse = req.body;
     try {
       const createdCourse = await CourseService.addCourse(newCourse);
-      util.setSuccess(statusCode.CREATED, 'Course Added!', createdCourse);
-      return util.send(res);
+      utiln.setSuccess(statusCode.CREATED, "Course Added!", createdCourse);
+      return utiln.send(res);
     } catch (error) {
-      util.setError(statusCode.BAD_REQUEST, error.message);
-      return util.send(res);
+      utiln.setError(statusCode.BAD_REQUEST, error.message);
+      return utiln.send(res);
     }
   }
 
@@ -43,15 +44,22 @@ class CourseController {
     const alteredCourse = req.body;
     const { id } = req.params;
     if (!isUUID.v4(id)) {
-      util.setError(statusCode.BAD_REQUEST, 'Please input a valid uuid  value');
+      util.setError(statusCode.BAD_REQUEST, "Please input a valid uuid  value");
       return util.send(res);
     }
     try {
       const updateCourse = await CourseService.updateCourse(id, alteredCourse);
       if (!updateCourse) {
-        util.setError(statusCode.NOT_FOUND, `Cannot find course with the id: ${id}`);
+        util.setError(
+          statusCode.NOT_FOUND,
+          `Cannot find course with the id: ${id}`
+        );
       } else {
-        util.setSuccess(statusCode.SUCCESS_NO_CONTENT, 'Course updated', updateCourse);
+        util.setSuccess(
+          statusCode.SUCCESS_NO_CONTENT,
+          "Course updated",
+          updateCourse
+        );
       }
       return util.send(res);
     } catch (error) {
@@ -64,7 +72,7 @@ class CourseController {
     const { id } = req.params;
 
     if (!isUUID.v4(id)) {
-      util.setError(statusCode.BAD_REQUEST, 'Please input a valid uuid  value');
+      util.setError(statusCode.BAD_REQUEST, "Please input a valid uuid  value");
       return util.send(res);
     }
 
@@ -72,9 +80,12 @@ class CourseController {
       const theCourse = await CourseService.getCourse(id);
 
       if (!theCourse) {
-        util.setError(statusCode.NOT_FOUND, `Cannot find course with the id ${id}`);
+        util.setError(
+          statusCode.NOT_FOUND,
+          `Cannot find course with the id ${id}`
+        );
       } else {
-        util.setSuccess(statusCode.OK, 'Found Course', theCourse);
+        util.setSuccess(statusCode.OK, "Found Course", theCourse);
       }
       return util.send(res);
     } catch (error) {
@@ -87,7 +98,7 @@ class CourseController {
     const { id } = req.params;
 
     if (!isUUID.v4(id)) {
-      util.setError(statusCode.BAD_REQUEST, 'Please provide a numeric value');
+      util.setError(statusCode.BAD_REQUEST, "Please provide a numeric value");
       return util.send(res);
     }
 
@@ -95,9 +106,12 @@ class CourseController {
       const courseToDelete = await CourseService.deleteCourse(id);
 
       if (courseToDelete) {
-        util.setSuccess(statusCode.SUCCESS_NO_CONTENT, 'Course deleted');
+        util.setSuccess(statusCode.SUCCESS_NO_CONTENT, "Course deleted");
       } else {
-        util.setError(statusCode.NOT_FOUND, `Course with the id ${id} cannot be found`);
+        util.setError(
+          statusCode.NOT_FOUND,
+          `Course with the id ${id} cannot be found`
+        );
       }
       return util.send(res);
     } catch (error) {
