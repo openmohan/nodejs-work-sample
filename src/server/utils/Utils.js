@@ -22,12 +22,6 @@ export default class Util {
   }
 
   send(res) {
-    // const result = {
-    //   status: this.type,
-    //   message: this.message,
-    //   data: this.data,
-    // };
-
     switch (this.statusCode) {
       case status.OK:
         return res.status(this.statusCode).json(this.data);

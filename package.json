@@ -8,6 +8,7 @@
     "apidoc": "$(npm bin)/apidoc  -f \".*\\.js$\" -i src/ -o doc/",
     "dev": "DEBUG=ws-nodejs-re:* $(npm bin)/nodemon --exec babel-node -L src/app.js",
     "lint": "$(npm bin)/eslint src/ config/ test/",
+    "format": "$(npm bin)/eslint --fix src/ config/ test/",
     "start": "node src/app.js",
     "test": "NODE_ENV=test PORT=3333 $(npm bin)/mocha --require @babel/register --exit $(find test -name '*spec.js')",
     "integration-test": "export PORT=3333 NODE_ENV=test &&  sequelize db:migrate:undo:all  && sequelize db:migrate  && nyc --require @babel/register  mocha ./test/integration/integration.js --timeout 20000 --exit",
