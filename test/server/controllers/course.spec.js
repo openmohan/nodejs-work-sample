@@ -270,6 +270,41 @@ describe('Testing the Course controller:', async () => {
       updateCourseStub.restore();
     });
 
+    it('failure - failed update course service call', async () => {
+      const request = {
+        body: {
+          id: 'f6859199-400b-48db-9a74-9071514ca3d2',
+          name: 'physics',
+        },
+        params: { id: 'f6859199-400b-48db-9a74-9071514ca3d2' },
+      };
+
+      const response = {};
+      const utilErrorSpy = sinon.spy();
+      const utilSendSpy = sinon.spy();
+
+      Util.prototype.setError = utilErrorSpy;
+      Util.prototype.send = utilSendSpy;
+
+      response.status = function status() {
+        return { json() {} };
+      };
+
+
+      const updateCourseStub = sinon.stub(courseService, 'updateCourse').resolves(false);
+      const body = {
+        id: 'testID',
+        name: 'testName',
+      };
+      request.body = body;
+      await CourseController.updateCourse(request, response);
+      sinon.assert.calledOnce(utilErrorSpy);
+      sinon.assert.calledOnce(utilSendSpy);
+      sinon.assert.calledOnce(updateCourseStub);
+      updateCourseStub.calledOnceWith(body);
+      updateCourseStub.restore();
+    });
+
     it('failure - should be not able to create course due to bad id', async () => {
       const request = {
         body: {
@@ -453,6 +488,114 @@ describe('Testing the Course controller:', async () => {
       sinon.assert.calledOnce(getCourseStub);
       getCourseStub.calledOnceWith(request.params.id);
       getCourseStub.restore();
+    });
+  });
+  describe('Testing the delete course:', async () => {
+    it('success - should be able to delete course', async () => {
+      const request = {
+        params: { id: 'f6859199-400b-48db-9a74-9071514ca3d2' },
+      };
+
+      const response = {};
+      const utilErrorSpy = sinon.spy();
+      const utilSendSpy = sinon.spy();
+
+      Util.prototype.setError = utilErrorSpy;
+      Util.prototype.send = utilSendSpy;
+
+      response.status = function status() {
+        return { json() {} };
+      };
+
+      const body = {
+        id: 'testID',
+        name: 'testName',
+      };
+      const deleteCourseStub = sinon.stub(courseService, 'deleteCourse').resolves(body);
+      await CourseController.deleteCourse(request, response);
+      sinon.assert.notCalled(utilErrorSpy);
+      sinon.assert.calledOnce(utilSendSpy);
+      sinon.assert.calledOnce(deleteCourseStub);
+      deleteCourseStub.calledOnceWith(body);
+      deleteCourseStub.restore();
+    });
+
+    it('failure - failed delete course service call', async () => {
+      const request = {
+        params: { id: 'f6859199-400b-48db-9a74-9071514ca3d2' },
+      };
+
+      const response = {};
+      const utilErrorSpy = sinon.spy();
+      const utilSendSpy = sinon.spy();
+
+      Util.prototype.setError = utilErrorSpy;
+      Util.prototype.send = utilSendSpy;
+
+      response.status = function status() {
+        return { json() {} };
+      };
+
+
+      const deleteCourseStub = sinon.stub(courseService, 'deleteCourse').resolves(false);
+      await CourseController.deleteCourse(request, response);
+      sinon.assert.calledOnce(utilErrorSpy);
+      sinon.assert.calledOnce(utilSendSpy);
+      sinon.assert.calledOnce(deleteCourseStub);
+      deleteCourseStub.restore();
+    });
+
+    it('failure - should be not able to create course due to bad id', async () => {
+      const request = {
+        params: { id: 'ftest3d2' },
+      };
+
+      const response = {};
+      const utilErrorSpy = sinon.spy();
+      const utilSendSpy = sinon.spy();
+
+      Util.prototype.setError = utilErrorSpy;
+      Util.prototype.send = utilSendSpy;
+
+      response.status = function status() {
+        return { json() {} };
+      };
+
+
+      const deleteCourseStub = sinon.stub(courseService, 'deleteCourse').resolves();
+      await CourseController.deleteCourse(request, response);
+      sinon.assert.calledOnce(utilErrorSpy);
+      sinon.assert.calledOnce(utilSendSpy);
+      deleteCourseStub.restore();
+    });
+
+    it('failure - should be not able to delete course - bad request', async () => {
+      const request = {
+        params: {
+          id: 'f6859199-400b-48db-9a74-9071514ca3d2',
+        },
+      };
+
+      const response = {};
+      const utilErrorSpy = sinon.spy();
+      const utilSendSpy = sinon.spy();
+
+      Util.prototype.setError = utilErrorSpy;
+      Util.prototype.send = utilSendSpy;
+
+      response.status = function status() {
+        return { json() {} };
+      };
+
+
+      const deleteCourseStub = sinon.stub(courseService, 'deleteCourse').rejects();
+
+      await CourseController.deleteCourse(request, response);
+      sinon.assert.calledOnce(utilErrorSpy);
+      sinon.assert.calledOnce(utilSendSpy);
+      sinon.assert.calledOnce(deleteCourseStub);
+      deleteCourseStub.calledOnceWith(request.params.id, request.body);
+      deleteCourseStub.restore();
     });
   });
 });
